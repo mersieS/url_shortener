@@ -1,0 +1,36 @@
+name: Ruby CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.3.5
+
+      - name: Install dependencies
+        run: bundle install
+
+      - name: Run tests
+        run: bundle exec rspec
+
+  deploy:
+    if: github.ref == 'refs/heads/main' && success()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Production
+        run: |
+          echo "Deploy işlemleri buraya eklenir."
+          # Örneğin, bir sunucuya SSH ile bağlanarak dağıtım yapılabilir.
