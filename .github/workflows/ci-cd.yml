@@ -25,12 +25,3 @@ jobs:
 
       - name: Run tests
         run: bundle exec rspec
-
-  deploy:
-    if: github.ref == 'refs/heads/main' && success()
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to Production
-        run: |
-          echo "Deploy işlemleri buraya eklenir."
-          # Örneğin, bir sunucuya SSH ile bağlanarak dağıtım yapılabilir.
